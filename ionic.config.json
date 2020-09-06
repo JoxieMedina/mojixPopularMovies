@@ -1,0 +1,7 @@
+{
+  "name": "mojixPopularMovies",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
