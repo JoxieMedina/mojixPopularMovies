@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Mojix Popular Movies
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,23 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Mojix Popular Movies</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card *ngFor="let movie of popularMovies || async" (click)="goToMovieDetails(movie)">
+    <ion-card-header>
+      <ion-card-subtitle>{{movie.vote_average | toTmdbScore}}</ion-card-subtitle>
+      <ion-card-title>{{movie.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-img [src]="movie.backdrop_path | toTmdbURL"></ion-img>
+      {{movie.overview}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll *ngIf="popularMovies && popularMovies?.length>0" threshold="15%" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

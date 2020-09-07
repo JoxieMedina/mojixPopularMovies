@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-import { HomePage } from './home.page';
+
+import { IonicModule } from '@ionic/angular';
+
+import { MoviePageRoutingModule } from './movie-routing.module';
+
+import { MoviePage } from './movie.page';
 import { ToTmdbURLPipe } from '../pipes/to-tmdb-url.pipe';
 import { ToTmdbScorePipe } from '../pipes/to-tmdb-score.pipe';
-import { HomePageRoutingModule } from './home-routing.module';
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    MoviePageRoutingModule
   ],
-  declarations: [HomePage, ToTmdbURLPipe, ToTmdbScorePipe]
+  declarations: [MoviePage, ToTmdbURLPipe, ToTmdbScorePipe]
 })
-export class HomePageModule {}
+export class MoviePageModule {}

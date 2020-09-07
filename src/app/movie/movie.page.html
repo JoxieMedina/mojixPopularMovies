@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>{{movieItem.vote_average | toTmdbScore}} ({{movieItem.vote_count}})</ion-card-subtitle>
+      <ion-card-title>{{movieItem.title}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-img [src]="movieItem.poster_path | toTmdbURL"></ion-img>
+      {{movieItem.overview}}
+    </ion-card-content>
+  </ion-card>
+</ion-content>
