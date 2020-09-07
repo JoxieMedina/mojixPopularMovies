@@ -14,7 +14,6 @@ export class MoviePage implements OnInit {
     const { movie , lang } = router.getCurrentNavigation().extras.state;
     this.movieItem = movie as TMDBPopularItem;
     translate.use(lang);
-    console.log(this.movieItem);
    }
 
   ngOnInit() {
