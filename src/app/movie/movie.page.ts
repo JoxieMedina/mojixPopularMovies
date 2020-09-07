@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TMDBPopularItem } from '../providers/services/themoviedb.service';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.page.html',
@@ -10,8 +10,10 @@ import { TMDBPopularItem } from '../providers/services/themoviedb.service';
 export class MoviePage implements OnInit {
   movieItem: TMDBPopularItem
 
-  constructor(private router: Router) {
-    this.movieItem = router.getCurrentNavigation().extras.state as TMDBPopularItem;
+  constructor(router: Router,  public translate: TranslateService) {
+    const { movie , lang } = router.getCurrentNavigation().extras.state;
+    this.movieItem = movie as TMDBPopularItem;
+    translate.use(lang);
     console.log(this.movieItem);
    }
 

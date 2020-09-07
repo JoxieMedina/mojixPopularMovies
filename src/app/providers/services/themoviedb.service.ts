@@ -3,6 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from "@angular/common/http";
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Storage } from '@ionic/storage';
+
 
 export interface TMDBPopularItem {
   poster_path: string,
@@ -32,15 +34,24 @@ export interface TMDBPopularResponse {
   providedIn: 'root'
 })
 export class ThemoviedbService {
+  savedStorageKey: string = 'TMDB_MOJIX_POPULAR';
+  savedPopularMovies: TMDBPopularResponse;
 
-  constructor(public http: HttpClient) { 
+  constructor(public http: HttpClient, private storage: Storage) { 
+    storage.get(this.savedStorageKey).then((val) => {
+      this.savedPopularMovies = JSON.parse(val);
+    });
   }
 
-  getPopularByPage(page: number) : Observable<TMDBPopularResponse> {
-    let callURL = `${environment.TMDB_API_BASE_URL}/movie/popular?page=${page}`;
+  getPopularByPage(page: number, lang: string = 'en') : Observable<TMDBPopularResponse> {
+    let callURL = `${environment.TMDB_API_BASE_URL}/movie/popular?page=${page}&language=${lang}`;
     return this.http.get<TMDBPopularResponse>(callURL).pipe(
       map(res => res)
     );
+  }
+
+  saveForOfflineUse(tmdbPopularResponse: TMDBPopularResponse) {
+    this.storage.set(this.savedStorageKey, JSON.stringify(tmdbPopularResponse));
   }
 
 }

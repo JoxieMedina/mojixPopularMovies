@@ -1,8 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Mojix Popular Movies
+      {{ 'HOME.TITLE' | translate }}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-select interface="popover" #langSelect [value]="translate.currentLang"  (ionChange)="onLangChange(langSelect.value)">
+        <ion-select-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang | uppercase }}</ion-select-option>
+      </ion-select>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
@@ -11,9 +17,10 @@
     <ion-toolbar>
       <ion-title size="large">Mojix Popular Movies</ion-title>
     </ion-toolbar>
+   
   </ion-header>
-
-  <ion-card *ngFor="let movie of popularMovies || async" (click)="goToMovieDetails(movie)">
+  
+  <ion-card *ngFor="let movie of popularMovies" (click)="goToMovieDetails(movie)">
     <ion-card-header>
       <ion-card-subtitle>{{movie.vote_average | toTmdbScore}}</ion-card-subtitle>
       <ion-card-title>{{movie.title}}</ion-card-title>

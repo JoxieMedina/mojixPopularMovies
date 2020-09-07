@@ -3,18 +3,17 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
-import { ToTmdbURLPipe } from '../pipes/to-tmdb-url.pipe';
-import { ToTmdbScorePipe } from '../pipes/to-tmdb-score.pipe';
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ToTmdbURLPipe, ToTmdbScorePipe]
+  declarations: [HomePage]
 })
 export class HomePageModule {}
